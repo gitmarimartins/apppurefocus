@@ -1,14 +1,13 @@
-plugins {
+esse é o do app plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
 android {
-    namespace = "com.example.purefocus"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    namespace = "com.purefocus.app" // ID do aplicativo
+    compileSdk = flutter.compileSdkVersion // Certifique-se de que essa versão é válida
+    ndkVersion = flutter.ndkVersion // Mantenha se necessário
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,25 +19,23 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.purefocus"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        applicationId = "com.purefocus.app" // ID do aplicativo
+        minSdk = flutter.minSdkVersion // Verifique se essa versão é válida
+        targetSdk = flutter.targetSdkVersion // Verifique se essa versão é válida
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
     }
 }
 
-flutter {
-    source = "../.."
+dependencies {
+    implementation "com.google.firebase:firebase-auth:22.0.0" 
+    implementation "com.google.firebase:firebase-database:20.2.0" 
 }
+
+apply plugin: 'com.google.gms.google-services' // Isso deve ser a última linha

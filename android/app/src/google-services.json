@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "295114155660",
+    "project_id": "purefocusapp",
+    "storage_bucket": "purefocusapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295114155660:android:cbddf818f1d93a164e3da9",
+        "android_client_info": {
+          "package_name": "com.purefocus.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTZq_2CQdWSppLUfRo7o7M2FE7yjieD80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

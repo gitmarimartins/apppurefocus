@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        google() 
-        mavenCentral() 
+        google()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.0' // Atualize para a versão correspondente
-        classpath 'com.google.gms:google-services:4.3.15' // A versão mais recente do plugin Google Services
+        classpath 'com.android.tools.build:gradle:8.3.0' // Versão do plugin Android
+        classpath 'com.google.gms:google-services:4.3.15' // Versão mais recente do plugin Google Services
     }
 }
 
@@ -20,6 +20,7 @@ rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }

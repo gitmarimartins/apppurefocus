@@ -1,4 +1,4 @@
-esse é o do app plugins {
+plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
@@ -6,7 +6,7 @@ esse é o do app plugins {
 
 android {
     namespace = "com.purefocus.app" // ID do aplicativo
-    compileSdk = flutter.compileSdkVersion // Certifique-se de que essa versão é válida
+    compileSdk = 34 // Atualize para a versão desejada ou mantenha como flutter.compileSdkVersion se for válido
     ndkVersion = flutter.ndkVersion // Mantenha se necessário
 
     compileOptions {
@@ -20,10 +20,13 @@ android {
 
     defaultConfig {
         applicationId = "com.purefocus.app" // ID do aplicativo
-        minSdk = flutter.minSdkVersion // Verifique se essa versão é válida
+        minSdk = 23 // Atualize para 23, conforme necessário
         targetSdk = flutter.targetSdkVersion // Verifique se essa versão é válida
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // Definindo applicationName
+        resValue "string", "applicationName", "purefocus"
     }
 
     buildTypes {
@@ -34,8 +37,14 @@ android {
 }
 
 dependencies {
-    implementation "com.google.firebase:firebase-auth:22.0.0" 
-    implementation "com.google.firebase:firebase-database:20.2.0" 
+    // Importando a BoM do Firebase
+    implementation platform('com.google.firebase:firebase-bom:33.4.0')
+
+    // Dependências do Firebase
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
-apply plugin: 'com.google.gms.google-services' // Isso deve ser a última linha
+// Aplicando o plugin do Google Services
+apply plugin: 'com.google.gms.google-services' 

@@ -1,80 +1,146 @@
 import 'package:flutter/material.dart';
-import 'signup_screen.dart'; // Importando a tela de cadastro
-import 'forgot_password.dart'; // Importando a tela de recuperação de senha
+import 'package:firebase_auth/firebase_auth.dart';
+import 'signup_screen.dart';
+import 'forgot_password.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void _login(BuildContext context) async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // Navegue para a tela inicial do app após o login bem-sucedido
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        // O usuário não existe
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Erro'),
+            content: Text('Email não encontrado. Por favor, crie uma conta.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        // A senha está incorreta
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Erro'),
+            content: Text('Senha inválida. Tente novamente.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      } else {
+        // Outros erros
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Erro'),
+            content: Text('Erro ao tentar fazer login.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  }
+
+  void _signInWithGoogle() async {
+    final Uri _url = Uri.parse('https://your-google-auth-url'); // Coloque aqui sua URL de autenticação
+    if (await canLaunch(_url.toString())) {
+      await launch(_url.toString());
+    } else {
+      throw 'Could not launch $_url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFBFBFB), // Fundo na cor #FBFBFB
+      backgroundColor: Color(0xFFFBFBFB),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo centralizada
             Image.asset('assets/imagens/logoapp.png', width: 200, height: 200),
             SizedBox(height: 15),
-            // Texto de título com fonte LemonMilk Bold
             Text(
               'PURE FOCUS',
               style: TextStyle(
                 fontFamily: 'LemonMilk',
                 fontSize: 35,
-                fontWeight: FontWeight.bold, // Usando LemonMilk Bold
-                color: Color(0xFF485935), // Verde escuro
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF485935),
               ),
             ),
             SizedBox(height: 30),
-            // Campo de e-mail
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Digite seu email',
                 labelStyle: TextStyle(
                   color: Colors.black,
-                  fontFamily: 'Poppins', // Fonte Poppins para labels
-                  fontWeight: FontWeight.normal, // Usando Poppins regular
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.normal,
                 ),
-                prefixIcon: Icon(
-                  Icons.email_outlined,
-                  color: Colors.black, // Ícone preto
-                ),
-                prefixIconConstraints: BoxConstraints(minWidth: 40), // Espaço para o ícone
+                prefixIcon: Icon(Icons.email_outlined, color: Colors.black),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Linha preta
+                  borderSide: BorderSide(color: Colors.black),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Linha preta ao focar
+                  borderSide: BorderSide(color: Colors.black),
                 ),
-                contentPadding: EdgeInsets.only(left: 40), // Espaçamento do texto
+                contentPadding: EdgeInsets.only(left: 40),
               ),
             ),
             SizedBox(height: 20),
-            // Campo de senha
             TextField(
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'Digite sua senha',
                 labelStyle: TextStyle(
                   color: Colors.black,
-                  fontFamily: 'Poppins', // Fonte Poppins para labels
-                  fontWeight: FontWeight.normal, // Usando Poppins regular
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.normal,
                 ),
-                prefixIcon: Icon(
-                  Icons.lock_outline,
-                  color: Colors.black, // Ícone preto
-                ),
-                prefixIconConstraints: BoxConstraints(minWidth: 40), // Espaço para o ícone
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.black),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Linha preta
+                  borderSide: BorderSide(color: Colors.black),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Linha preta ao focar
+                  borderSide: BorderSide(color: Colors.black),
                 ),
-                contentPadding: EdgeInsets.only(left: 40), // Espaçamento do texto
+                contentPadding: EdgeInsets.only(left: 40),
               ),
-              obscureText: true, // Campo de senha oculta
+              obscureText: true,
             ),
-            // Link de recuperação de senha
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -88,33 +154,32 @@ class LoginScreen extends StatelessWidget {
                   'Esqueci minha senha',
                   style: TextStyle(
                     color: Colors.black,
-                    fontFamily: 'Poppins', // Fonte Poppins para link
+                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 20),
-            // Botão de entrar com sombra
             ElevatedButton(
-              onPressed: () {}, // Lógica do botão "Entrar"
+              onPressed: () => _login(context),
               child: Text(
                 'Entrar',
                 style: TextStyle(
                   fontSize: 18,
-                  fontFamily: 'Poppins', // Usando Poppins Bold para botão
-                  fontWeight: FontWeight.bold, // Texto mais grosso
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF93A267), // Cor do botão
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40), // Menor largura
+                backgroundColor: Color(0xFF93A267),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0), // Bordas mais quadradas
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
-                elevation: 5, // Adiciona sombra
-                shadowColor: Colors.black.withOpacity(0.5), // Cor da sombra
+                elevation: 5,
+                shadowColor: Colors.black.withOpacity(0.5),
               ),
             ),
             SizedBox(height: 15),
@@ -123,38 +188,36 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,
-                fontFamily: 'Poppins', // Fonte Poppins para "ou"
-                fontWeight: FontWeight.normal, // Usando Poppins regular
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.normal,
               ),
             ),
             SizedBox(height: 15),
-            // Botão de login com Google
             ElevatedButton.icon(
-              onPressed: () {}, // Lógica para "Entrar com o Google"
+              onPressed: _signInWithGoogle,
               icon: Image.asset(
-                'assets/imagens/icongoogle.png', // Usando a imagem como ícone
-                width: 30, // Tamanho da imagem
-                height: 30, // Tamanho da imagem
+                'assets/imagens/icongoogle.png',
+                width: 30,
+                height: 30,
               ),
               label: Text(
                 'Entrar com o Google',
                 style: TextStyle(
                   fontSize: 18,
-                  fontFamily: 'Poppins', // Usando Poppins Bold para botão
-                  fontWeight: FontWeight.bold, // Texto mais grosso
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF93A267), // Cor do botão
+                backgroundColor: Color(0xFF93A267),
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0), // Bordas mais quadradas
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
             ),
             SizedBox(height: 20),
-            // Link para criar conta
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -162,12 +225,23 @@ class LoginScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => SignupScreen()),
                 );
               },
-              child: Text(
-                'Não possui uma conta? Cadastre-se',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Poppins', // Fonte Poppins para cadastro
-                  fontWeight: FontWeight.normal,
+              child: RichText(
+                text: TextSpan(
+                  text: 'Não possui uma conta? ',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.normal,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Cadastre-se',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

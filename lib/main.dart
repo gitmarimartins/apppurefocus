@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart'; // Certifique-se de que o caminho está correto
+import 'package:firebase_core/firebase_core.dart'; // Importa o Firebase
+import 'screens/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Garante que o Flutter esteja inicializado
+  await Firebase.initializeApp(); // Inicializa o Firebase
   runApp(MyApp());
 }
 

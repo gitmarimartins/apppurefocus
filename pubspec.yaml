@@ -10,19 +10,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8  # Downgraded as suggested
-  http: ^1.2.2  # Corrigido para a versão disponível
-  flutter_svg: ^2.0.10+1  # Atualizado
-  pin_code_fields: ^8.0.1  # Atualizado
-  firebase_core: ^3.6.0  # Verifique se necessário
-  firebase_auth: ^5.3.0  # Verifique se necessário
-  cloud_firestore: ^5.4.4  # Ajuste a versão para a recomendada
+  cupertino_icons: ^1.0.8
+  http: ^1.2.2
+  flutter_svg: ^2.0.10+1
+  pin_code_fields: ^8.0.1
   url_launcher: ^6.1.5 
+  font_awesome_flutter: ^10.3.0  # Adicionando a biblioteca Font Awesome
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0  # Atualizado
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
@@ -31,6 +29,16 @@ flutter:
     - assets/imagens/logoapp.png
     - assets/imagens/logoappinicio.png
     - assets/imagens/icongoogle.png
+    - assets/imagens/fumar.jpg
+    - assets/imagens/beber.jpg
+    - assets/imagens/drogas.jpg
+    - assets/imagens/bulimia.jpg
+    - assets/imagens/pornografia.jpg
+    - assets/imagens/clinica1.jpg
+    - assets/imagens/clinica2.jpg
+    - assets/imagens/clinica3.jpg
+    - assets/imagens/clinica4.jpg
+
 
   fonts:
     - family: Poppins

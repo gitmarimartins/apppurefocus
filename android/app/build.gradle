@@ -37,14 +37,12 @@ android {
 }
 
 dependencies {
-    // Importando a BoM do Firebase
-    implementation platform('com.google.firebase:firebase-bom:33.4.0')
-
-    // Dependências do Firebase
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-analytics'
+    // Remova as dependências do Firebase
+    // implementation platform('com.google.firebase:firebase-bom:33.4.0')
+    // implementation 'com.google.firebase:firebase-auth'
+    // implementation 'com.google.firebase:firebase-database'
+    // implementation 'com.google.firebase:firebase-analytics'
 }
 
-// Aplicando o plugin do Google Services
-apply plugin: 'com.google.gms.google-services' 
+// Remova a aplicação do plugin do Google Services
+// apply plugin: 'com.google.gms.google-services'

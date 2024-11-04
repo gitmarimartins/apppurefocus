@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Importando para autenticação
-import 'home_screen.dart'; // Importando a tela inicial do seu app
+import 'questionario_vicios_screen.dart'; // Certifique-se de que o caminho está correto
 
-// Classe principal que representa a tela de cadastro (SignupScreen)
 class SignupScreen extends StatefulWidget {
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -14,30 +12,35 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
 
-  Future<void> _register() async {
+  void _register() {
     // Verifique se os campos estão preenchidos e se as senhas coincidem
-    if (_passwordController.text == _confirmPasswordController.text) {
-      try {
-        // Criação do usuário com email e senha
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
-
-        // Navega para a tela inicial do app
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()), // Navegando para a tela inicial
-        );
-      } catch (e) {
-        // Trate erros, como e-mail já cadastrado
+    if (_nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _confirmPasswordController.text.isNotEmpty) {
+      
+      if (_passwordController.text == _confirmPasswordController.text) {
+        // Exibe uma mensagem de sucesso
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Erro ao cadastrar: $e'),
+          content: Text('Cadastro concluído com sucesso!'),
+          duration: Duration(seconds: 2),
+        ));
+        
+        // Aguardar 2 segundos e redirecionar para a tela de questionário
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => QuestionarioScreen()), // Certifique-se de que QuestionarioScreen está definido
+          );
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('As senhas não coincidem!'),
         ));
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('As senhas não coincidem!'),
+        content: Text('Por favor, preencha todos os campos!'),
       ));
     }
   }
@@ -45,8 +48,8 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4F4EC), // Cor de fundo
-      body: SingleChildScrollView( // Adicionado para permitir rolagem
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +66,6 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             SizedBox(height: 30),
-            // Campo para o nome
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
@@ -75,7 +77,6 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             SizedBox(height: 20),
-            // Campo para o email
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -87,7 +88,6 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             SizedBox(height: 20),
-            // Campo para a senha
             TextField(
               controller: _passwordController,
               decoration: InputDecoration(
@@ -100,7 +100,6 @@ class _SignupScreenState extends State<SignupScreen> {
               obscureText: true,
             ),
             SizedBox(height: 20),
-            // Campo para confirmar a senha
             TextField(
               controller: _confirmPasswordController,
               decoration: InputDecoration(
@@ -112,26 +111,24 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
-            // Botão de cadastro
+            SizedBox(height: 80),
             ElevatedButton(
-              onPressed: _register, // Chama a função de cadastro
+              onPressed: _register,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF93A267),
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                backgroundColor: Color(0xFF485935),
+                padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                 elevation: 15,
               ),
               child: Text(
                 'Cadastre-se',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 25, color: Colors.white),
+                style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
               ),
             ),
-            SizedBox(height: 15),
-            // Botão de texto para voltar à tela de login
+            SizedBox(height: 8),
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Volta para a tela anterior
+                Navigator.pop(context);
               },
               child: RichText(
                 text: TextSpan(

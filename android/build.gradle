@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.3.0' // Versão do plugin Android
-        classpath 'com.google.gms:google-services:4.3.15' // Versão mais recente do plugin Google Services
+        // A linha do plugin Google Services foi removida
     }
 }
 

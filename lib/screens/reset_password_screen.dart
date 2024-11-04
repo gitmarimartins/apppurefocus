@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart'; // Certifique-se de importar sua HomeScreen
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -105,7 +106,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Senha redefinida com sucesso!')),
                     );
-                    // Navegar para outra tela ou página inicial
+                    // Navegar para a HomeScreen
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
                   }
                 },
                 child: const Text(
@@ -118,10 +123,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF93A267), // Cor do botão
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  backgroundColor: const Color(0xFF485935), // Cor do botão
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
               ),

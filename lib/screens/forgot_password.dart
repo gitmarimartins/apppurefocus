@@ -35,7 +35,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black, width: 2),
+                border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2),
               ),
               child: TextField(
                 decoration: InputDecoration(
@@ -54,7 +54,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
                 // Navegar para a tela de verificação de código
@@ -76,13 +76,13 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF485935),
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);

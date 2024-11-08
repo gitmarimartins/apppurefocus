@@ -34,122 +34,161 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white, // Fundo branco
       body: Stack(
         children: [
+          // Círculos maiores atrás
+          Positioned(
+            top: -180, // Mantém a mesma posição
+            left: -100, // Mantém a mesma posição
+            child: Container(
+              height: 460, // Diminuído para criar o efeito desejado
+              width: 460, // Diminuído para criar o efeito desejado
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xFFCBD6B4), // Verde suave
+                  width: 40, // Largura da borda
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            top: -180, // Mantém a mesma posição
+            right: -100, // Mantém a mesma posição
+            child: Container(
+              height: 460, // Diminuído para criar o efeito desejado
+              width: 460, // Diminuído para criar o efeito desejado
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xFFCBD6B4), // Roxo suave
+                  width: 40, // Largura da borda
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+
           // Círculos sobrepostos de fundo
           Positioned(
-            top: -100, // Ajusta a posição do círculo esquerdo
-            left: -40, // Move para a esquerda para criar interseção
+            top: -120, // Ajuste a posição para melhor alinhamento
+            left: -40, // Ajuste a posição para melhor alinhamento
             child: Container(
-              height: 300,
-              width: 300,
+              height: 400, // Reduz um pouco o tamanho para não ficar muito grande
+              width: 400, // Reduz um pouco o tamanho para não ficar muito grande
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFF0F3E8), // Verde suave
                 shape: BoxShape.circle,
               ),
             ),
           ),
           Positioned(
-            top: -100,
-            right: -40,
+            top: -120, // Ajuste a posição para melhor alinhamento
+            right: -40, // Ajuste a posição para melhor alinhamento
             child: Container(
-              height: 300,
-              width: 300,
+              height: 400, // Reduz um pouco o tamanho para não ficar muito grande
+              width: 400, // Reduz um pouco o tamanho para não ficar muito grande
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFE5E8D9), // Cor ajustada
                 shape: BoxShape.circle,
               ),
             ),
           ),
+
           // AppBar modificado
           AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 100,
             centerTitle: true,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Image.asset(
-                'assets/imagens/logoapp.png',
-                height: 30,
-                width: 30,
-              ),
-            ),
+            automaticallyImplyLeading: false,  // Impede que o botão de voltar apareça
             title: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Linha com a logo e a data
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Image.asset(
+                        'assets/imagens/logoapp.png',
+                        height: 40,
+                        width: 40,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50.0),
+                      child: Icon(
+                        Icons.calendar_today,
+                        color: Color(0xFF485935),
+                      ),
+                    ),
+                  ],
+                ),
                 Text(
-                  "09/10/2024",
+                  "06/11/2024",
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Color(0xFF485935),
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    height: 0.50,
                   ),
                 ),
               ],
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Icon(
-                  Icons.calendar_today,
-                  color: Color(0xFF485935),
-                ),
-              ),
-            ],
           ),
+
           // Conteúdo abaixo do AppBar
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(23.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 60),
-                // Dias da semana e calendário com 7 dias e o dia 9 destacado
+                // Dias da semana
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("D", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("T", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("Q", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("Q", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
-                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF485935))),
+                    Text("D", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("T", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("Q", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("Q", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
+                    Text("S", style: TextStyle(fontFamily: 'Poppins', color: Color(0xFF93A267))),
                   ],
                 ),
                 SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    for (int i = 6; i <= 12; i++)
+                    for (int i = 3; i <= 9; i++)
                       CircleAvatar(
-                        backgroundColor: i == 9 ? Color(0xFF93A267) : Colors.transparent,
+                        backgroundColor: i == 6 ? Color(0xFF93A267) : Colors.transparent,
                         child: Text(
                           i.toString(),
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: i == 9 ? Colors.white : Color(0xFF485935),
+                            color: i == 6 ? Colors.white : Color(0xFF485935),
                           ),
                         ),
                       ),
                   ],
                 ),
-                SizedBox(height: 90),
+                SizedBox(height: 150),
                 Center(
                   child: Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(30),
                     margin: EdgeInsets.only(top: 40),
                     width: 400,
                     decoration: BoxDecoration(
                       color: Color(0xFF93A267),
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                     child: Column(
                       children: [
                         Text(
-                          "COMO VOCÊ ESTÁ SE SENTINDO HOJE?",
+                          "COMO VOCÊ ESTÁ                                           SE SENTINDO HOJE?",
                           style: TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'LemonMilk',
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -162,11 +201,12 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                Icon(Icons.sentiment_dissatisfied, size: 60, color: Colors.white), // Aumenta o tamanho do ícone
-                                SizedBox(height: 8),
+                                Image.asset('assets/imagens/triste.png', height: 60, width: 60),
+                                SizedBox(height: 2),
                                 Text(
                                   "Triste",
                                   style: TextStyle(
+                                    fontSize: 17,
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF485935),
                                     fontWeight: FontWeight.bold,
@@ -176,11 +216,12 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Column(
                               children: [
-                                Icon(Icons.sentiment_neutral, size: 60, color: Colors.white), // Aumenta o tamanho do ícone
-                                SizedBox(height: 8),
+                                Image.asset('assets/imagens/neutro.png', height: 60, width: 60),
+                                SizedBox(height: 2),
                                 Text(
                                   "Neutro",
                                   style: TextStyle(
+                                    fontSize: 17,
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF485935),
                                     fontWeight: FontWeight.bold,
@@ -190,11 +231,12 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Column(
                               children: [
-                                Icon(Icons.sentiment_satisfied, size: 60, color: Colors.white), // Aumenta o tamanho do ícone
-                                SizedBox(height: 8),
+                                Image.asset('assets/imagens/feliz.png', height: 60, width: 60),
+                                SizedBox(height: 2),
                                 Text(
                                   "Feliz",
                                   style: TextStyle(
+                                    fontSize: 18,
                                     fontFamily: 'Poppins',
                                     color: Color(0xFF485935),
                                     fontWeight: FontWeight.bold,
@@ -227,12 +269,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      
+
       bottomNavigationBar: Container(
         height: 80, // Aumenta a altura do BottomNavigationBar
         child: BottomNavigationBar(
           backgroundColor: Color(0xFF93A267), // Cor de fundo do BottomNavigationBar
-          showUnselectedLabels: true, 
+          showUnselectedLabels: true,
           items: [
             BottomNavigationBarItem(
               backgroundColor: Color(0xFF93A267),
@@ -255,25 +297,25 @@ class HomeScreen extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => ProgressoScreen()),
                 );
                 break;
               case 1:
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => ViciosScreen()),
                 );
                 break;
               case 2:
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => AjudaScreen()),
                 );
                 break;
               case 3:
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => PerfilScreen()),
                 );

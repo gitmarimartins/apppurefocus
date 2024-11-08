@@ -98,7 +98,7 @@ class QuestionarioScreen extends StatelessWidget {
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       decoration: BoxDecoration(
-                        color: Color(0xFFCADBB7),
+                        color: const Color(0xFFE5E8D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Align(
@@ -117,7 +117,6 @@ class QuestionarioScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Outros botões sem navegação ainda
                 ...['Beber', 'Uso de drogas', 'Distúrbios Alimentares', 'Pornografia']
                     .map(
                       (text) => Padding(
@@ -126,7 +125,7 @@ class QuestionarioScreen extends StatelessWidget {
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                           decoration: BoxDecoration(
-                            color: Color(0xFFCADBB7),
+                            color: const Color(0xFFE5E8D9),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Align(
@@ -154,20 +153,24 @@ class QuestionarioScreen extends StatelessWidget {
     );
   }
 }
-
 class CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint1 = Paint()..color = Color(0xFFCADBB7).withOpacity(0.6);
-    final Paint paint2 = Paint()..color = Color(0xFF93A267).withOpacity(0.6);
-    final Paint paint3 = Paint()..color = Color(0xFFBACF9B).withOpacity(0.6);
+    // Definição de cores com opacidades ajustadas para um efeito idêntico
+    final Paint paint3 = Paint()..color = Color(0xFFE5E8D9).withOpacity(0.8); // Cor clara
+    final Paint paint2 = Paint()..color = Color(0xFF93A267).withOpacity(0.8); // Cor intermediária
+    final Paint paint1 = Paint()..color = Color(0xFFCBD6B4).withOpacity(0.7); // Cor escura
 
-    double radius = 150; // Raio das esferas
+    // Ajuste nos tamanhos e posições dos círculos para efeito desejado
+    double radius1 = 300;
+    double radius2 = 240;
+    double radius3 = 230; // Aumentando o tamanho do p3
 
-    // Ajustes das esferas para ficarem na diagonal inferior direita
-    canvas.drawCircle(Offset(size.width * 0.70, size.height), radius, paint1); // Primeira esfera (metade visível)
-    canvas.drawCircle(Offset(size.width * 0.85, size.height), radius, paint2); // Segunda esfera (metade visível)
-    canvas.drawCircle(Offset(size.width * 0.50, size.height), radius, paint3); // Terceira esfera (metade visível e sobreposta)
+    // Círculos posicionados com precisão na parte inferior para replicar o design
+    canvas.drawCircle(Offset(size.width * 0.5, size.height * 1.20), radius1, paint1);
+    canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.98), radius2, paint2);
+    // Movendo o p3 mais para cima e para a direita
+    canvas.drawCircle(Offset(size.width * 0.7, size.height * 1.08), radius3, paint3);
   }
 
   @override

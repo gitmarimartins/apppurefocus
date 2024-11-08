@@ -22,8 +22,9 @@ class ViciosScreen extends StatelessWidget {
             Text(
               'VÍCIOS',
               style: TextStyle(
+                fontFamily: 'LemonMilk',
                 color: Colors.white,
-                fontSize: 34,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),

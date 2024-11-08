@@ -3,7 +3,43 @@ import 'ajuda_screen.dart';
 import 'vicios_screen.dart';
 import 'perfil_screen.dart';
 
-class ProgressoScreen extends StatelessWidget {
+class ProgressoScreen extends StatefulWidget {
+  @override
+  _ProgressoScreenState createState() => _ProgressoScreenState();
+}
+
+class _ProgressoScreenState extends State<ProgressoScreen> {
+  // Variáveis para as alturas dos gráficos
+  double alturaFumar = 0;
+  double alturaProgress = 0;
+  double alturaMetas = 0;
+  double alturaOutras = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Animação para os gráficos subirem
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        alturaFumar = 180;
+        alturaProgress = 150;
+        alturaMetas = 170;
+        alturaOutras = 110; // Para a última barra
+      });
+    });
+  }
+
+  void showMessage(String message) {
+    // Exibe um SnackBar com a mensagem
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +63,9 @@ class ProgressoScreen extends StatelessWidget {
                     Text(
                       'SEU PROGRESSO',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'LemonMilk',
                         color: Colors.white,
-                        fontSize: 30,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -64,52 +100,80 @@ class ProgressoScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 180,
-                                color: Color(0xFF4C5C25),
-                              ),
-                              SizedBox(height: 10),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              showMessage("A barra de Fumar indica o progresso na redução de vícios relacionados ao tabagismo.");
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedContainer(
+                                  width: 40,
+                                  height: alturaFumar,
+                                  duration: Duration(seconds: 2),
+                                  curve: Curves.easeOut,
+                                  color: Color(0xFF4C5C25),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                           SizedBox(width: 20),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 150,
-                                color: Color(0xFF93A267),
-                              ),
-                              SizedBox(height: 10),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              showMessage("A barra de Progresso mostra seu avanço no objetivo geral de parar de fumar.");
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedContainer(
+                                  width: 40,
+                                  height: alturaProgress,
+                                  duration: Duration(seconds: 2),
+                                  curve: Curves.easeOut,
+                                  color: Color(0xFF93A267),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                           SizedBox(width: 20),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 170,
-                                color: Color(0xFFCADBB7),
-                              ),
-                              SizedBox(height: 10),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              showMessage("A barra de Metas reflete as metas específicas que você atingiu.");
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedContainer(
+                                  width: 40,
+                                  height: alturaMetas,
+                                  duration: Duration(seconds: 2),
+                                  curve: Curves.easeOut,
+                                  color: Color(0xFFCADBB7),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                           SizedBox(width: 20),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 110,
-                                color: Color(0xFFD3D9C2),
-                              ),
-                              SizedBox(height: 10),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              showMessage("A barra de Outras representa outros aspectos relevantes para o seu progresso.");
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedContainer(
+                                  width: 40,
+                                  height: alturaOutras,
+                                  duration: Duration(seconds: 2),
+                                  curve: Curves.easeOut,
+                                  color: Color(0xFFD3D9C2),
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -145,7 +209,7 @@ class ProgressoScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Você está há X dias\nsem [vício escolhido].',
+                      'Você está há 0 dias\nsem Fumar.',
                       textAlign: TextAlign.center, // Centraliza horizontalmente
                       style: TextStyle(
                         fontFamily: 'Poppins',
@@ -166,7 +230,7 @@ class ProgressoScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Você atingiu X metas\naté agora.',
+                      'Você atingiu 0 metas\naté agora.',
                       textAlign: TextAlign.center, // Centraliza horizontalmente
                       style: TextStyle(
                         fontFamily: 'Poppins',
@@ -182,6 +246,7 @@ class ProgressoScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
+        
         height: 80, // Aumentado para 70
         color: Color(0xFF93A267),
         child: Row(

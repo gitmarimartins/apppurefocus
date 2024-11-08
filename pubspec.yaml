@@ -38,6 +38,11 @@ flutter:
     - assets/imagens/clinica2.jpg
     - assets/imagens/clinica3.jpg
     - assets/imagens/clinica4.jpg
+    - assets/imagens/triste.png
+    - assets/imagens/feliz.png
+    - assets/imagens/neutro.png
+
+
 
 
   fonts:

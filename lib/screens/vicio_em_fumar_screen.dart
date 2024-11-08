@@ -10,19 +10,19 @@ class VicioEmFumarScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5E8D9),
       body: SafeArea(
-        child: Column(
-          children: [
-            const HeaderWidget(),
-            const SizedBox(height: 30),
-            _buildVicioItem(context, 'FUMAR', 'assets/imagens/fumar.jpg'),
-            const SizedBox(height: 30),
-            Expanded(
-              child: SingleChildScrollView(
+        child: SingleChildScrollView(  // Permite rolagem se necessário
+          child: Column(
+            children: [
+              const HeaderWidget(),
+              const SizedBox(height: 30),
+              _buildVicioItem(context, 'FUMAR', 'assets/imagens/fumar.jpg'),
+              const SizedBox(height: 30),
+              Padding(
                 padding: const EdgeInsets.all(30),
                 child: _buildInformacoesDetalhadas(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(context),
@@ -79,7 +79,7 @@ class VicioEmFumarScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFE5E6E1),
+        color: const Color(0xFFE5E8D9),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -134,7 +134,7 @@ class VicioEmFumarScreen extends StatelessWidget {
       unselectedLabelStyle: const TextStyle(fontSize: 14),
       items: const [
         BottomNavigationBarItem(
-           backgroundColor:  Color(0xFF93A267),
+          backgroundColor: Color(0xFF93A267),
           icon: Icon(Icons.show_chart),
           label: "Progresso",
         ),
@@ -160,7 +160,10 @@ class VicioEmFumarScreen extends StatelessWidget {
             );
             break;
           case 1:
-            // Já estamos na ViciosScreen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ViciosScreen()),
+            );
             break;
           case 2:
             Navigator.push(
@@ -186,36 +189,41 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      padding: const EdgeInsets.all(16),  // Usando padding adaptável
       width: double.infinity,
       decoration: BoxDecoration(
         color: const Color(0xFF93A267),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.warning, color: Colors.white, size: 40),
-                const SizedBox(width: 10),
-                const Text(
-                  'Vício',
-                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.warning, color: Colors.white, size: 40),
+              const SizedBox(width: 10),
+              const Text(
+                'Vício',
+                style: TextStyle(
+                  color: Colors.white, 
+                  fontSize: 24, 
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'LemonMilk', // Fonte LemonMilk aqui
                 ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            const Padding(  // Adicionando Padding para mover "FUMAR" para a direita
-              padding: EdgeInsets.only(left: 20), // Ajuste este valor conforme necessário
-              child: Text(
-                'Em fumar',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 55, top: 0.05),
+            child: Text(
+              'Em fumar',
+              style: TextStyle(
+                color: Colors.white, 
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
